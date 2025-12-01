@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div></div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="row" style="margin-top:12px">
+          <input id="n1" class="input" placeholder="Number 1" type="number">
+          <input id="n2" class="input" placeholder="Number 2" type="number">
+        </div>
+        <div class="row">
+          <input id="n3" class="input" placeholder="Number 3" type="number">
+          <input id="n4" class="input" placeholder="Number 4" type="number">
+        </div>
+        <div class="row">
+          <button id="minBtn" class="btn">Min</button>
+          <div id="minOut" class="output">Min: </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row">
+          <button id="sumBtn" class="btn">Sum</button>
+          <div id="sumOut" class="output">Sum: </div>
+        </div>
+
+        <hr style="margin:12px 0;border:none;height:1px;background:linear-gradient(90deg,rgba(15,23,42,0.02),rgba(15,23,42,0.02));">
+
+        <div style="font-weight:600">odd 1–20</div>
+        <div class="row">
+          <button id="oddsBtn" class="btn">sondgoi toonuud</button>
+          <div id="oddsOut" class="output">Sondgoi: </div>
+        </div>
+      </div>
+
+      <div class="card" style="grid-column:span 2">
+        <div class="row" style="margin-top:12px">
+          <input id="primeInput" class="input" placeholder="Enter integer" type="number">
+          <button id="primeBtn" class="btn">anhnii too</button>
+        </div>
+        <div id="primeOut" class="output">anhnii too: </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function isPrime(n) {
+      n = Math.trunc(n);
+      if (n < 2) return false;
+      if (n % 2 === 0) return n === 2;
+      for (let i = 3; i * i <= n; i += 2) if (n % i === 0) return false;
+      return true;
+    }
+
+    document.getElementById('minBtn').addEventListener('click', () => {
+      const inputs = [
+        document.getElementById('n1'),
+        document.getElementById('n2'),
+        document.getElementById('n3'),
+        document.getElementById('n4')
+      ];
+
+      for (const inp of inputs) {
+        if (inp.value.trim() === "") {
+          document.getElementById('minOut').textContent = 'BUH TOOGOO ORUUL';
+          alert('BUH TOOGOO ORUUL');
+          return;
+        }
+      }
+
+      const a = Number(inputs[0].value);
+      const b = Number(inputs[1].value);
+      const c = Number(inputs[2].value);
+      const d = Number(inputs[3].value);
+
+      const m = Math.min(a, b, c, d);
+      document.getElementById('minOut').textContent = 'Min: ' + m;
+    });
+
+    document.getElementById('sumBtn').addEventListener('click', () => {
+      let s = 0;
+      for (let i = 1; i <= 10; i++) if (i % 2 === 0) s += i;
+      document.getElementById('sumOut').textContent = 'Sum: ' + s;
+    });
+
+    document.getElementById('oddsBtn').addEventListener('click', () => {
+      const odds = [];
+      for (let i = 1; i <= 20; i++) if (i % 2 === 1) odds.push(i);
+      console.log('Odd numbers from 1 to 20:', ...odds);
+      document.getElementById('oddsOut').textContent = 'Sondgoi: ' + odds.join(', ');
+    });
+
+    document.getElementById('primeBtn').addEventListener('click', () => {
+      const val = Number(document.getElementById('primeInput').value);
+      if (Number.isNaN(val)) {
+        document.getElementById('primeOut').textContent = 'Result: toogoo oruul';
+        return;
+      }
+
+      const p = isPrime(val);
+      document.getElementById('primeOut').textContent = p ? 'Result: anhnii too' : 'Result: anhnii too bish';
+    });
+  </script>
+</body>
+</html>
